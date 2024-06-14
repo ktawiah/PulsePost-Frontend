@@ -1,8 +1,10 @@
-"use client";
+// "use client";
 
-import { Button } from "@/components/ui/button";
-import { toast } from "react-toastify";
+// import { Button } from "@/components/ui/button";
+// import { useGetApiTestQuery } from "@/lib/features/test-api-slice";
+// import { toast } from "react-toastify";
 
-export default function Home() {
-  return <Button onClick={() => toast.error("toast working")}>Click me</Button>;
-}
+// export default function Home() {
+//   const { data, isLoading, error } = useGetApiTestQuery();
+//   console.log(error);
+// }

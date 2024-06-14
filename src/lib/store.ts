@@ -1,8 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./features/auth-slice";
+import { accountsSlice } from "./features/accounts-endpoints";
+import { postsSlice } from "./features/posts-endpoints";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: {
+      auth: authReducer,
+      accounts: accountsSlice.reducer,
+      posts: postsSlice.reducer,
+    },
   });
 };
 
