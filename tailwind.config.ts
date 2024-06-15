@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
-const config = {
+const config: Config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -71,10 +71,22 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slide-from-down-and-fade-1":
+          "slideFromDownAndFade 0.6s ease-in-out 0.1s both",
+        "slide-from-down-and-fade-2":
+          "slideFromDownAndFade 0.6s ease-in-out 0.2s both",
+        "slide-from-down-and-fade-3":
+          "slideFromDownAndFade 0.6s ease-in-out 0.3s both",
+        "slide-from-down-and-fade-4":
+          "slideFromDownAndFade 0.6s ease-in-out 0.4s both",
+        "slide-from-down-and-fade-5":
+          "slideFromDownAndFade 0.6s ease-in-out 0.5s both",
+        "slide-from-down-and-fade-6":
+          "slideFromDownAndFade 0.6s ease-in-out 0.6s both",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+};
 
-export default config
+export default config;

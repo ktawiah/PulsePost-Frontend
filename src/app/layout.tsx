@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ToastProvider from "@/providers/react-toastify";
 import StoreProvider from "@/providers/redux";
+import { ThemeProvider } from "@/providers/theme";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn(inter.className)}>
         <StoreProvider>
-          {children}
-          <ToastProvider />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="container mobile:mx-8 2xl:mx-16">{children}</div>
+          </ThemeProvider>
         </StoreProvider>
       </body>
     </html>
