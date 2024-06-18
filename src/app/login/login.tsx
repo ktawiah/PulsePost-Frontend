@@ -1,18 +1,25 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ChangeEvent, FormEvent, useState } from "react";
-import FormInputComponent from "./input";
-import OAuthButtons from "./oauth-buttons";
-import CheckAccountStatus from "./check-account";
+import Spinner from "@/components/ui/spinner";
+import { useLoginAccountMutation } from "@/lib/features/auth-endpoints";
+import { authenticateUser } from "@/lib/features/auth-slice";
 import { useAppDispatch } from "@/lib/hooks";
-import { setAuthType } from "@/lib/features/auth-slice";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "sonner";
+import CheckAccountStatus from "../../components/layout/auth/check-account";
+import FormInputComponent from "../../components/layout/auth/input";
+import OAuthButtons from "../../components/layout/auth/oauth-buttons";
 interface Form {
   email: string;
   password: string;
 }
 
 const Login = () => {
+  const [login, { isLoading }] = useLoginAccountMutation();
+  const router = useRouter();
   const [formData, setFormData] = useState<Form>({
     email: "",
     password: "",
@@ -24,8 +31,22 @@ const Login = () => {
   };
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(formData);
-    setFormData({ email: "", password: "" });
+    login({ ...formData })
+      .unwrap()
+      .then(() => {
+        dispatch(authenticateUser());
+        setFormData({ email: "", password: "" });
+        toast.success("Account sign in successful.", {
+          description: "You are being redirected to the home page.",
+        });
+        router.push("/dashboard");
+      })
+      .catch((error) => {
+        toast.error("Login unsuccessful.", {
+          description: "Please check your credentials and try again.",
+        });
+        console.error(error);
+      });
   };
   const inputFormClassName = "w-full";
 
@@ -57,16 +78,22 @@ const Login = () => {
             key="Password"
             type="password"
           >
-            <p
+            <Link
               className="self-end text-xs cursor-pointer "
-              onClick={() => dispatch(setAuthType("reset"))}
+              href={"/reset-password"}
             >
               Forgotten your password? Reset.
-            </p>
+            </Link>
           </FormInputComponent>
         </div>
-        <Button type="submit" className="self-end" size={"sm"}>
-          Sign Up
+        <Button
+          type="submit"
+          className="self-end gap-2"
+          size={"sm"}
+          disabled={isLoading}
+        >
+          {isLoading && <Spinner />}
+          <p>Sign In</p>
         </Button>
         <div className="flex gap-2 w-full justify-center items-center">
           <Separator className="w-[39%]" />
@@ -74,7 +101,7 @@ const Login = () => {
           <Separator className="w-[39%]" />
         </div>
         <OAuthButtons />
-        <CheckAccountStatus className="self-center" />
+        <CheckAccountStatus type="login" className="self-center" />
       </form>
     </>
   );

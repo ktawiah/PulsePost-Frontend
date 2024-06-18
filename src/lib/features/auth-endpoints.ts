@@ -1,15 +1,16 @@
 import api from "./api";
 
-const accountsUrl = `${process.env.API_BASE_URL}/accounts`;
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export const accountsSlice = api.injectEndpoints({
+const accountsUrl = `${backendUrl}/accounts`;
+export const authEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
     registerAccount: build.mutation<
       User,
       Pick<User, "email" | "first_name" | "last_name"> & Pass
     >({
       query: (data) => ({
-        url: `${accountsUrl}/register`,
+        url: `${accountsUrl}/register/`,
         method: "POST",
         body: {
           email: data.email,
@@ -25,7 +26,7 @@ export const accountsSlice = api.injectEndpoints({
       Pick<User, "email"> & Pick<Pass, "password">
     >({
       query: (data) => ({
-        url: `${accountsUrl}/login`,
+        url: `${accountsUrl}/login/`,
         method: "POST",
         body: {
           email: data.email,
@@ -35,7 +36,7 @@ export const accountsSlice = api.injectEndpoints({
     }),
     verifyAccount: build.mutation<Pick<User, "refresh">, Pick<User, "access">>({
       query: (data) => ({
-        url: `${accountsUrl}/verify`,
+        url: `${accountsUrl}/verify/`,
         method: "POST",
         body: {
           token: data.access,
@@ -80,12 +81,13 @@ export const accountsSlice = api.injectEndpoints({
       Pick<SocialAuthType, "state" | "code" | "provider">
     >({
       query: (data) => ({
-        url: `${accountsUrl}/oauth/${data.provider}/?state=${encodeURIComponent(
-          data.state
-        )}&code=${encodeURIComponent(data.code)}`,
+        url: `${backendUrl}/accounts/oauth/${
+          data.provider
+        }/?state=${encodeURIComponent(data.state)}&code=${encodeURIComponent(
+          data.code
+        )}`,
         method: "POST",
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/x-www-form-urlencoded",
         },
       }),
@@ -101,4 +103,4 @@ export const {
   useVerifyAccountMutation,
   useResetAccountPasswordMutation,
   useSocialAccountLoginMutation,
-} = accountsSlice;
+} = authEndpoints;

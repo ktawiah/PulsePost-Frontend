@@ -67,6 +67,15 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        slideFromDownAndFade: {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(12px)",
+            visibility: "hidden",
+          },
+          "1%": { visibility: "visible" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

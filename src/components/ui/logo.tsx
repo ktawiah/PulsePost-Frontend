@@ -1,9 +1,9 @@
-import { MdConnectWithoutContact } from "react-icons/md";
-import { Abril_Fatface } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Calistoga } from "next/font/google";
 import Link from "next/link";
+import { MdConnectWithoutContact } from "react-icons/md";
 
-const logoFont = Abril_Fatface({
+const logoFont = Calistoga({
   subsets: ["latin"],
   weight: ["400"],
 });
@@ -11,11 +11,11 @@ const logoFont = Abril_Fatface({
 const Logo = () => {
   return (
     <Link href="/" className="flex gap-2 items-center text-primary">
-      <MdConnectWithoutContact size={"32"} />
+      <MdConnectWithoutContact size={40} className="scale-x-125" />
       <span
         className={cn(
           logoFont.className,
-          "font-bold text-base lg:text-2xl italic"
+          "font-extrabold text-base lg:text-2xl italic"
         )}
       >
         PulsePost

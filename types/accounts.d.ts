@@ -21,6 +21,7 @@ interface SocialAuthType {
   provider: string;
   state: string;
   code: string;
-  authorization_url: string;
+  authorization_uri: string;
   token: string;
+  redirect_uri;
 }

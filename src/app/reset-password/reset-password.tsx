@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ChangeEvent, FormEvent, useState } from "react";
-import CheckAccountStatus from "./check-account";
-import FormInputComponent from "./input";
+import CheckAccountStatus from "../../components/layout/auth/check-account";
+import FormInputComponent from "../../components/layout/auth/input";
 
 const ResetPassword = () => {
   const [formData, setFormData] = useState<Record<"email", string>>({
@@ -39,7 +39,7 @@ const ResetPassword = () => {
         <Button type="submit" className="self-end" size={"sm"}>
           Sign Up
         </Button>
-        <CheckAccountStatus className="self-center" />
+        <CheckAccountStatus type="reset" className="self-center" />
       </form>
     </>
   );

@@ -4,8 +4,11 @@ import "./globals.css";
 import StoreProvider from "@/providers/redux";
 import { ThemeProvider } from "@/providers/theme";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
+
+require("dotenv").config();
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,6 +31,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="container mobile:mx-8 2xl:mx-16">{children}</div>
+            <Toaster />
           </ThemeProvider>
         </StoreProvider>
       </body>

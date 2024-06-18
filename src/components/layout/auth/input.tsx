@@ -27,6 +27,7 @@ const FormInputComponent = (props: InputProps) => {
       <Label htmlFor={props.htmlFor}>{props.label}</Label>
       <Input
         name={props.name}
+        type={props.type}
         value={props.value}
         onChange={props.onChange}
         className={cn(props.className, "w-full")}

@@ -1,6 +1,6 @@
 import api from "./api";
 
-const postsUrl = `${process.env.API_BASE_URL}/posts`;
+const postsUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/posts`;
 
 export const postsSlice = api.injectEndpoints({
   endpoints: (build) => ({

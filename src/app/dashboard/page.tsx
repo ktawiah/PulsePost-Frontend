@@ -1,9 +1,7 @@
-"use client";
-
 const Page = () => {
   return (
     <>
-      <div>Home page</div>
+      <main className="">Welcome to the dashboard</main>
     </>
   );
 };
