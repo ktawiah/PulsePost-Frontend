@@ -40,8 +40,8 @@ const OAuthButtons = () => {
       )
       .then(async (response) => {
         setIsLoading(false);
-        if (response.status == 200) {
-          window.location.replace(response.data.authorization_url);
+        if (response.status === 200) {
+          router.replace(response.data.authorization_url);
         }
       })
       .catch((error) => {

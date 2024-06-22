@@ -1,17 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface AuthType {
+interface InitialState {
+  isAuthenticated: boolean;
   authType: "reset" | "register" | "login";
 }
 
-type InitialState = {
-  isAuthenticated: boolean;
-  isLoading: boolean;
-} & AuthType;
-
 const initialState: InitialState = {
   isAuthenticated: false,
-  isLoading: false,
   authType: "login",
 };
 

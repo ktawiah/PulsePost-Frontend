@@ -2,7 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Spinner from "@/components/ui/spinner";
+import { useCheckAuthentication } from "@/hooks/use-check-auth";
 import { useRegisterAccountMutation } from "@/lib/features/auth-endpoints";
+import { authenticateUser } from "@/lib/features/auth-slice";
 import { useAppDispatch } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -20,6 +22,7 @@ interface Form {
 }
 
 const Register = () => {
+  useCheckAuthentication();
   const [formData, setFormData] = useState<Form>({
     email: "",
     password: "",
@@ -46,7 +49,10 @@ const Register = () => {
           last_name: "",
           re_password: "",
         });
-        toast.success("Account registration success.");
+        toast.success("Account registration success.", {
+          description: "You are being redirected to the dashboard.",
+        });
+        dispatch(authenticateUser());
         router.push("/login");
       })
       .catch((error) => {

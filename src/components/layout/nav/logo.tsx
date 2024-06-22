@@ -18,7 +18,7 @@ const Logo = () => {
           "font-extrabold text-base lg:text-2xl italic"
         )}
       >
-        PulsePost
+        PULSEPOST
       </span>
     </Link>
   );

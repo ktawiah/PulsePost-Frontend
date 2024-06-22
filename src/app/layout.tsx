@@ -31,7 +31,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="container mobile:mx-8 2xl:mx-16">{children}</div>
-            <Toaster />
+            <Toaster richColors />
           </ThemeProvider>
         </StoreProvider>
       </body>

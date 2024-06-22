@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Spinner from "@/components/ui/spinner";
+import { useCheckAuthentication } from "@/hooks/use-check-auth";
 import { useLoginAccountMutation } from "@/lib/features/auth-endpoints";
 import { authenticateUser } from "@/lib/features/auth-slice";
 import { useAppDispatch } from "@/lib/hooks";
@@ -12,12 +13,14 @@ import { toast } from "sonner";
 import CheckAccountStatus from "../../components/layout/auth/check-account";
 import FormInputComponent from "../../components/layout/auth/input";
 import OAuthButtons from "../../components/layout/auth/oauth-buttons";
+
 interface Form {
   email: string;
   password: string;
 }
 
 const Login = () => {
+  useCheckAuthentication();
   const [login, { isLoading }] = useLoginAccountMutation();
   const router = useRouter();
   const [formData, setFormData] = useState<Form>({
@@ -39,7 +42,7 @@ const Login = () => {
         toast.success("Account sign in successful.", {
           description: "You are being redirected to the home page.",
         });
-        router.push("/dashboard");
+        router.replace("/dashboard");
       })
       .catch((error) => {
         toast.error("Login unsuccessful.", {

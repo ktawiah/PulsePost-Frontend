@@ -9,7 +9,7 @@ interface CheckAccountStatusProps {
 const CheckAccountStatus = (props: CheckAccountStatusProps) => {
   return (
     <>
-      {props.type == "register" ? (
+      {props.type === "register" ? (
         <div className={cn(props.className, "text-xs")}>
           <span>Already have an account? </span>
           <Link
@@ -19,7 +19,7 @@ const CheckAccountStatus = (props: CheckAccountStatusProps) => {
             Sign In
           </Link>
         </div>
-      ) : props.type == "login" ? (
+      ) : props.type === "login" ? (
         <div className={cn(props.className, "text-xs")}>
           <span>Don&apos;t have an account? </span>
           <Link

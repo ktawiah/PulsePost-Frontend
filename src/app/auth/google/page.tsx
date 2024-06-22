@@ -5,36 +5,44 @@ import { authenticateUser } from "@/lib/features/auth-slice";
 import { useAppDispatch } from "@/lib/hooks";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+import { useEffect, useRef } from "react";
 
 const Page = () => {
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
   const [login, { isLoading }] = useSocialAccountLoginMutation();
   const router = useRouter();
-  if (searchParams.get("code") && searchParams.get("state")) {
-    login({
-      code: searchParams.get("code")!,
-      state: searchParams.get("state")!,
-      provider: "google",
-    })
-      .unwrap()
-      .then(() => {
-        dispatch(authenticateUser());
-        toast.success("Account login successful.", {
-          description: "You are being redirected to the home page.",
+  const effectRan = useRef(false);
+
+  useEffect(() => {
+    const code = searchParams.get("code");
+    const state = searchParams.get("state");
+    if (code && state && !effectRan.current) {
+      login({ code, state, provider: "google-oauth2" })
+        .unwrap()
+        .then((data) => {
+          dispatch(authenticateUser());
+
+          toast.success("Account login successful.", {
+            description: "You are being redirected to the home page.",
+          });
+          router.replace("/dashboard");
+        })
+        .catch((error) => {
+          toast.error("Failed to log in.", {
+            description:
+              "An error occurred while logging in. Please try again.",
+          });
+          console.log(error);
         });
-        router.push("/dashboard");
-      })
-      .catch((error) => {
-        toast.error("Failed to log in.", {
-          description: "An error occurred while logging in. Please try again.",
-        });
-        console.error(error);
-      });
-  }
+    }
+    return () => {
+      effectRan.current = true;
+    };
+  }, [login, router, dispatch, searchParams]);
   return (
     <div className="min-h-screen w-full flex justify-center items-center">
-      {isLoading && <Spinner className="text-2xl text-foreground" />}
+      {isLoading && <Spinner className="text-foreground text-2xl" />}
     </div>
   );
 };

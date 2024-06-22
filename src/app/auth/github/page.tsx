@@ -21,14 +21,12 @@ const Page = () => {
       login({ code, state, provider: "github" })
         .unwrap()
         .then((data) => {
-          console.log(data);
-          console.log(`${window.origin}/dashboard`);
           dispatch(authenticateUser());
 
           toast.success("Account login successful.", {
             description: "You are being redirected to the home page.",
           });
-          window.location.replace(`${window.origin}/dashboard`);
+          router.replace("/dashboard");
         })
         .catch((error) => {
           toast.error("Failed to log in.", {

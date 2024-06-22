@@ -2,7 +2,7 @@
 
 import Login from "@/app/login/login";
 import Register from "@/app/register/register";
-import ResetPassword from "@/app/reset-password/reset-password";
+import ResetPassword from "@/app/password-reset/reset-password";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 interface AuthFormProps {
@@ -15,7 +15,7 @@ const AuthForm = (props: AuthFormProps) => {
       <CardHeader className="self-center font-semibold text-lg">
         {props.type === "register" ? (
           <span>Getting Started</span>
-        ) : props.type == "login" ? (
+        ) : props.type === "login" ? (
           <span>Welcome Back</span>
         ) : (
           <span>Reset Password</span>
@@ -24,7 +24,7 @@ const AuthForm = (props: AuthFormProps) => {
       <CardContent>
         {props.type === "register" ? (
           <Register />
-        ) : props.type == "login" ? (
+        ) : props.type === "login" ? (
           <Login />
         ) : (
           <ResetPassword />

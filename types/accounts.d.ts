@@ -25,3 +25,10 @@ interface SocialAuthType {
   token: string;
   redirect_uri;
 }
+
+interface ResetNewPass {
+  new_password: string;
+  re_new_password: string;
+  token: string;
+  uid: string;
+}

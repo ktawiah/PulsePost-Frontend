@@ -67,15 +67,28 @@ export const authEndpoints = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    resetAccountPassword: build.mutation<null, Pick<User, "email">>({
+    requestPasswordResetEmail: build.mutation<null, Pick<User, "email">>({
       query: (data) => ({
-        url: `${accountsUrl}/reset-password`,
+        url: `${accountsUrl}/reset-password/`,
         method: "POST",
-        data: {
+        body: {
           email: data.email,
         },
       }),
     }),
+    resetPassword: build.mutation<null, ResetNewPass>({
+      query: (data) => ({
+        url: `${accountsUrl}/reset-password-confirm/`,
+        method: "POST",
+        body: {
+          new_password: data.new_password,
+          re_new_password: data.re_new_password,
+          token: data.token,
+          uid: data.uid,
+        },
+      }),
+    }),
+
     socialAccountLogin: build.mutation<
       Pick<SocialAuthType, "token">,
       Pick<SocialAuthType, "state" | "code" | "provider">
@@ -101,6 +114,7 @@ export const {
   useRefreshAccountMutation,
   useRegisterAccountMutation,
   useVerifyAccountMutation,
-  useResetAccountPasswordMutation,
   useSocialAccountLoginMutation,
+  useRequestPasswordResetEmailMutation,
+  useResetPasswordMutation,
 } = authEndpoints;
