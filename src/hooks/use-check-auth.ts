@@ -1,6 +1,5 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { toast } from "sonner";
 import { useAppSelector } from "../lib/hooks";
 
 export const useCheckAuthentication = () => {
@@ -16,5 +15,5 @@ export const useCheckAuthentication = () => {
     return () => {
       effectRan.current = true;
     };
-  }, [authState, router]);
+  }, [authState, router, effectRan]);
 };

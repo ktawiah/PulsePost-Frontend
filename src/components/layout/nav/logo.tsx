@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Calistoga } from "next/font/google";
 import Link from "next/link";
-import { MdConnectWithoutContact } from "react-icons/md";
+import { MdConnectWithoutContact, MdOutlineCompost } from "react-icons/md";
 
 const logoFont = Calistoga({
   subsets: ["latin"],
@@ -10,12 +10,15 @@ const logoFont = Calistoga({
 
 const Logo = () => {
   return (
-    <Link href="/" className="flex gap-2 items-center text-primary">
-      <MdConnectWithoutContact size={40} className="scale-x-125" />
+    <Link
+      href="/"
+      className="flex gap-0 md:gap-1 lg:gap-2 items-center text-primary"
+    >
+      <MdOutlineCompost className="md:w-5 lg:w-6 h-auto" />
       <span
         className={cn(
           logoFont.className,
-          "font-extrabold text-base lg:text-2xl italic"
+          "font-extrabold text-base lg:text-xl italic"
         )}
       >
         PULSEPOST

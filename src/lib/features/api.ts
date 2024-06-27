@@ -6,7 +6,6 @@ import type {
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
 import { authenticateUser, logoutUser } from "./auth-slice";
-
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const mutex = new Mutex();
@@ -35,9 +34,16 @@ const baseQueryWithReauth: BaseQueryFn<
         );
         if (refreshResult.data) {
           api.dispatch(authenticateUser());
-
           result = await baseQuery(args, api, extraOptions);
         } else {
+          await baseQuery(
+            {
+              url: `${backendUrl}/accounts/logout/`,
+              method: "POST",
+            },
+            api,
+            extraOptions
+          );
           api.dispatch(logoutUser());
         }
       } finally {

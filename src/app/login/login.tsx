@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Spinner from "@/components/ui/spinner";
-import { useCheckAuthentication } from "@/hooks/use-check-auth";
 import { useLoginAccountMutation } from "@/lib/features/auth-endpoints";
 import { authenticateUser } from "@/lib/features/auth-slice";
 import { useAppDispatch } from "@/lib/hooks";
@@ -20,7 +19,7 @@ interface Form {
 }
 
 const Login = () => {
-  useCheckAuthentication();
+  // useCheckAuthentication();
   const [login, { isLoading }] = useLoginAccountMutation();
   const router = useRouter();
   const [formData, setFormData] = useState<Form>({

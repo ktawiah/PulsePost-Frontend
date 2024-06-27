@@ -1,6 +1,5 @@
 "use client";
 import FormInputComponent from "@/components/layout/auth/input";
-import { NavBar } from "@/components/layout/nav/navbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Spinner from "@/components/ui/spinner";
@@ -52,7 +51,6 @@ const Page = (searchParams: PageParams) => {
   return (
     <>
       <main className="w-full flex flex-col justify-center items-center gap-8">
-        <NavBar />
         <div className="flex flex-col gap-4 justify-center items-center w-full animate-slide-from-down-and-fade-6">
           <Card className="flex flex-col mb-4 animate-in">
             <CardHeader className="self-center font-semibold text-lg">

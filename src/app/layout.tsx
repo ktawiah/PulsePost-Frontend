@@ -5,6 +5,9 @@ import StoreProvider from "@/providers/redux";
 import { ThemeProvider } from "@/providers/theme";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import NavBar from "@/components/layout/nav/navbar";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +33,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="container mobile:mx-8 2xl:mx-16">{children}</div>
+            <div className="container mobile:mx-8 2xl:mx-16">
+              <NavBar />
+              {children}
+            </div>
             <Toaster richColors />
           </ThemeProvider>
         </StoreProvider>

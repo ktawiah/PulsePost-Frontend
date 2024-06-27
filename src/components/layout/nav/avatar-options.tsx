@@ -13,10 +13,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ReactNode } from "react";
 
-export function HamburgerMenu(props: { children: ReactNode }) {
+export function AvatarMenu(props: { children: ReactNode }) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>{props.children}</DropdownMenuTrigger>
+      <DropdownMenuTrigger>{props.children}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 mx-8">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />

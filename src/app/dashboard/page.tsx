@@ -1,13 +1,16 @@
-"use client";
+import AllPosts from "@/components/layout/dashboard/all-posts";
+import RecentPosts from "@/components/layout/dashboard/recent-posts";
+import { Separator } from "@/components/ui/separator";
 
-import { useCheckAuthentication } from "@/hooks/use-check-auth";
-
-const Page = () => {
-  useCheckAuthentication();
-
+const Page = async () => {
   return (
     <>
-      <main className="">Welcome to the dashboard</main>
+      <Separator className="my-3" />
+      <main className="w-full flex flex-col gap-4">
+        <RecentPosts />
+
+        <AllPosts />
+      </main>
     </>
   );
 };

@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Spinner from "@/components/ui/spinner";
-import { useCheckAuthentication } from "@/hooks/use-check-auth";
 import { useRegisterAccountMutation } from "@/lib/features/auth-endpoints";
 import { authenticateUser } from "@/lib/features/auth-slice";
 import { useAppDispatch } from "@/lib/hooks";
@@ -22,7 +21,6 @@ interface Form {
 }
 
 const Register = () => {
-  useCheckAuthentication();
   const [formData, setFormData] = useState<Form>({
     email: "",
     password: "",

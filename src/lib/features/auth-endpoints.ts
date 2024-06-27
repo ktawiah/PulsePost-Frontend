@@ -45,7 +45,7 @@ export const authEndpoints = api.injectEndpoints({
     }),
     logoutAccount: build.mutation({
       query: () => ({
-        url: `${accountsUrl}/logout`,
+        url: `${accountsUrl}/logout/`,
         method: "POST",
       }),
     }),
@@ -54,7 +54,7 @@ export const authEndpoints = api.injectEndpoints({
       Pick<User, "refresh">
     >({
       query: (data) => ({
-        url: `${accountsUrl}/refresh`,
+        url: `${accountsUrl}/refresh/`,
         method: "POST",
         data: {
           refresh: data.refresh,
@@ -62,6 +62,12 @@ export const authEndpoints = api.injectEndpoints({
       }),
     }),
     retrieveAccount: build.query<User, Pick<User, "id">>({
+      query: (args) => ({
+        url: `${accountsUrl}/users/${args.id}`,
+        method: "GET",
+      }),
+    }),
+    retrieveCurrentUser: build.query<User, null>({
       query: () => ({
         url: `${accountsUrl}/users/me`,
         method: "GET",
@@ -117,4 +123,6 @@ export const {
   useSocialAccountLoginMutation,
   useRequestPasswordResetEmailMutation,
   useResetPasswordMutation,
+  useRetrieveAccountQuery,
+  useRetrieveCurrentUserQuery,
 } = authEndpoints;

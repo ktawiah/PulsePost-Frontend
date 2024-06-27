@@ -14,7 +14,7 @@ export const postsSlice = api.injectEndpoints({
         method: "POST",
       }),
     }),
-    retrieveAllPosts: build.query<Post[], null>({
+    retrieveAllPosts: build.query<PaginatedPosts, null>({
       query: () => ({
         url: `${postsUrl}/`,
         method: "GET",
@@ -49,14 +49,21 @@ export const postsSlice = api.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    recentPost: build.query<PaginatedPosts, null>({
+      query: () => ({
+        url: `${postsUrl}/?recent_posts`,
+        // cache: "",
+      }),
+    }),
   }),
 });
 
-const {
+export const {
   useCreatePostMutation,
   useDeletePostQuery,
   usePartialUpdatePostMutation,
   useUpdatePostMutation,
   useRetrieveAllPostsQuery,
   useRetrievePostQuery,
+  useRecentPostQuery,
 } = postsSlice;
